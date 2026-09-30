@@ -1,42 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-
-let n1 = 6;
-let n2 = 2;
-
-
-$(document).ready(function(){
-  $("#b1").click(function(){
-    let soma = n1 + n2 ;
-    $("div").html("resultado da soma é "  + soma + ".");
-  });
-
-  $("#b2").click(function(){
-    let multiplicacao = n1 * n2 ;
-    $("div").html("resultado da multiplicação é " + multiplicacao + "." );
-  });
-
-  $("#b3").click(function(){
-    let subtracao = n1 - n2
-    $("div").html("resultado da subtração é " + subtracao + ".");
-  });
-
-  $("#b4").click(function(){
-    let divisao = n1 / n2 
-    $("div").html("resultado da divisão é " + divisao + "." );
-  });
-});
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora com Historico</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-<button id="b1">somar</button>
-<button id="b2">multiplicar</button>
-<button id="b3">subtrair</button>
-<button id="b4">dividir</button>
-<div></div>
 
+    <div class="container">
+        <h2>calculadora com historico</h2>
+
+        <div class="desing-inputs">
+            <input type="number" id="num1" placeholder="coloque seu primeiro numero aqui">
+            <input type="number" id="num2" placeholder="coloque seu segundo numero aqui">
+        </div>
+
+
+        <div class="buttons-area">
+            <button class="button" data-operacao="soma">+</button>
+            <button class="button" data-operacao="multiplicacao">×</button>
+            <button class="button" data-operacao="subtracao">-</button>
+            <button class="button" data-operacao="divisao">÷</button>
+        </div>
+
+        <div class="areadohistorico">
+            <label>Historico</label>
+            <div id="conteudodohistorico"></div>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function(){
+        $(".button").click(function(){
+            var n1 = $("#num1").val();
+            var n2 = $("#num2").val();
+            var tipoOperacao = $(this).data("operacao");
+
+            if(n1 === "" || n2 === "") {
+                alert("Por favor, preencha ambos os números.");
+                return;
+            }
+
+            
+            $.ajax({
+                url: "calculadora.php",
+                type: "POST",
+                data: {
+                    num1: n1,
+                    num2: n2,
+                    calculo: tipoOperacao
+                },
+                dataType: "html",
+                success: function(resultado) {
+                    $("#conteudodohistorico").prepend("<p>" + resultado + "</p>");
+                    
+                    $("#num1").val("");
+                    $("#num2").val("");
+                },
+                
+            });
+        });
+    });
+    </script>
 </body>
 </html>
