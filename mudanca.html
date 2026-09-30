@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+$(document).ready(function(){
+  // Botões de cor
+  $("#bot1").click(function(){
+    $("#texto").css("color", "yellow");
+  });
+  
+  $("#bot2").click(function(){
+    $("#texto").css("color", "blue");
+  });
+
+  $("#bot3").click(function(){
+    $("#texto").css("color", "green");
+  });
+
+  // Botão exibir cor atual
+  $("#bot4").click(function(){
+    alert("A cor que está aparecendo é: " + $("#texto").css("color"));
+  });
+
+  // Aumentar fonte
+  $('#bot5').click(function() {
+    var atual = parseInt($('#texto').css('font-size'));
+    $('#texto').css('font-size', (atual + 2) + 'px');
+  });
+
+  // Diminuir fonte
+  $('#bot6').click(function() {
+    var atual = parseInt($('#texto').css('font-size'));
+    $('#texto').css('font-size', (atual - 2) + 'px');
+  });
+  
+  var fontes = ["Arial, sans-serif", "Courier New, monospace", "Georgia, serif", "Comic Sans MS, cursive"];
+  var indiceFonte = 0;
+
+  $('#bot7').click(function() {
+    indiceFonte = (indiceFonte + 1) % fontes.length;
+    $('#texto').css('font-family', fontes[indiceFonte]);
+  });
+
+});
+</script>
+</head>
+<body>
+
+<p id="texto">Sempre há um jeito. Quando as probabilidades são impossíveis, faça o impossível.</p>
+
+<button id="bot1">amarelo</button>
+<button id="bot2">azul</button>
+<button id="bot3">verde</button>
+<button id="bot4">exibir</button>
+<button id="bot5">+</button>
+<button id="bot6">-</button>
+<button id="bot7">trocar fonte</button>
+
+</body>
+</html>
