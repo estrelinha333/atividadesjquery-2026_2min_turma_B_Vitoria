@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Cadastro</title>
+    <link rel="stylesheet" href="v.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="input-group">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+        </div>
+
+        <div class="input-group">
+            <label for="telefone">Telefone</label>
+            <input type="text" id="telefone" name="telefone" placeholder="coloque seu telefone aqui" required>
+        </div>
+
+        <div class="input-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+        </div>
+
+        <button type="button" id="gravar">gravar</button>
+        <button type="button" id="limpar">limpar</button>
+    </div>
+
+    <script>
+    $(document).ready(function(){
+        
+        
+        $("#gravar").on('click', function() {
+
+            
+            var valorNome = $("#nome").val();
+            var valortelefone = $("#telefone").val();
+            var valoremail = $("#email").val();
+
+            if(valorNome === "" || valortelefone === "" || valoremail === "") {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+            console.log("Nome: " + valorNome + " | Telefone: " + valortelefone + " | E-mail: " + valoremail);
+
+            
+            $.ajax({
+                url: "script.php",
+                type: "POST",
+                data: {
+                    nome: valorNome,
+                    telefone: valortelefone,
+                    email: valoremail
+                },
+                dataType: "html",
+                success: function(resposta) {
+                    console.log(resposta);
+                    alert("Dados enviados com sucesso!");
+                },
+                error: function() {
+                    alert("Erro ao enviar a requisição.");
+                }
+            });
+        });
+
+
+        $("#limpar").on('click', function() {
+            $("#nome").val("");
+            $("#telefone").val("");
+            $("#email").val("");
+        });
+
+    });
+    </script>
+</body>
+</html>
