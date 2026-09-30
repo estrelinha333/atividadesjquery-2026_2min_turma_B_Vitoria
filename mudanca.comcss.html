@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  /* Estilização para deixar a página com visual semelhante ao modelo */
+  body {
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .container {
+    border: 1px solid #ffcccc;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    width: 400px;
+    box-sizing: border-box;
+  }
+
+  #texto {
+    border: 1px solid #ccc;
+    background-color: #eee;
+    padding: 30px 15px;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 25px;
+    min-height: 40px;
+  }
+
+  .botoes-linha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 5px;
+  }
+
+  button {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+  }
+
+  /* Cores específicas para os botões conforme a imagem */
+  #bot1 {
+    background-color: #ffff00;
+    color: #000;
+    flex: 1;
+  }
+
+  #bot2 {
+    background-color: #0000ff;
+    color: #fff;
+    flex: 1;
+  }
+
+  #bot3 {
+    background-color: #00aa00; /* Ajustado para verde legível */
+    color: #fff;
+    flex: 1;
+  }
+
+  #bot5, #bot6 {
+    background-color: #d1a1d1;
+    font-weight: bold;
+  }
+
+  #bot4, #bot7 {
+    flex: 2;
+  }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#bot1").click(function(){
+    $("#texto").css("color", "yellow");
+  });
+  
+  $("#bot2").click(function(){
+    $("#texto").css("color", "blue");
+  });
+
+  $("#bot3").click(function(){
+    $("#texto").css("color", "green");
+  });
+
+  // Botão exibir cor atual
+  $("#bot4").click(function(){
+    alert("A cor que está aparecendo é: " + $("#texto").css("color"));
+  });
+
+  // Aumentar fonte
+  $('#bot5').click(function() {
+    var atual = parseInt($('#texto').css('font-size'));
+    $('#texto').css('font-size', (atual + 2) + 'px');
+  });
+
+  // Diminuir fonte
+  $('#bot6').click(function() {
+    var atual = parseInt($('#texto').css('font-size'));
+    $('#texto').css('font-size', (atual - 2) + 'px');
+  });
+
+  // Trocar fonte ciclicamente
+  var fontes = ["Arial, sans-serif", "Courier New, monospace", "Georgia, serif", "Comic Sans MS, cursive"];
+  var indiceFonte = 0;
+
+  $('#bot7').click(function() {
+    indiceFonte = (indiceFonte + 1) % fontes.length;
+    $('#texto').css('font-family', fontes[indiceFonte]);
+  });
+});
+</script>
+</head>
+<body>
+
+<div class="container">
+  <p id="texto">Sempre há um jeito. Quando as probabilidades são impossíveis, faça o impossível.</p>
+
+  <div class="botoes-linha">
+    <button id="bot5">+</button>
+    <button id="bot7">trocar fonte</button>
+    <button id="bot4">exibir</button>
+    <button id="bot6">-</button>
+  </div>
+
+  <div class="botoes-linha">
+    <button id="bot2">azul</button>
+    <button id="bot1">amarelo</button>
+    <button id="bot3">verde</button>
+  </div>
+</div>
+
+</body>
+</html>
